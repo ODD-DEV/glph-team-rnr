@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Solution 팀 R&R</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: #fafafa;
+    color: #1a1a1a;
+    line-height: 1.7;
+    padding: 60px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .header {
+    border-bottom: 3px solid #1a1a1a;
+    padding-bottom: 24px;
+    margin-bottom: 48px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .header .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-top: 8px;
+  }
+
+  .header .date {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+  }
+
+  .section-subtitle {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  /* Structure diagram */
+  .structure-box {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+
+  .structure-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .structure-row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .structure-row:last-child {
+    border-bottom: none;
+  }
+
+  .structure-level {
+    width: 120px;
+    min-width: 120px;
+    padding: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .structure-content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .member-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .chip-ian { background: #1a1a1a; color: #fff; }
+  .chip-dong { background: #2563eb; color: #fff; }
+  .chip-sam { background: #7c3aed; color: #fff; }
+  .chip-min { background: #059669; color: #fff; }
+  .chip-soo { background: #d97706; color: #fff; }
+  .chip-claude { background: #f3f4f6; color: #666; border: 1px solid #e0e0e0; }
+
+  .member-chip .role {
+    font-size: 11px;
+    opacity: 0.8;
+    font-weight: 400;
+  }
+
+  .connector {
+    color: #ccc;
+    font-size: 12px;
+  }
+
+  /* Person section */
+  .person-block {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: visible;
+  }
+
+  .person-header {
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .person-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .person-title {
+    font-size: 13px;
+    color: #888;
+    font-weight: 400;
+  }
+
+  .person-principle {
+    padding: 16px 28px;
+    background: #fafafa;
+    font-size: 13px;
+    color: #666;
+    border-bottom: 1px solid #f0f0f0;
+    font-style: italic;
+  }
+
+  .task-group {
+    padding: 20px 28px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .task-group:last-child {
+    border-bottom: none;
+  }
+
+  .task-group-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .task-table td {
+    padding: 8px 4px;
+    font-size: 13px;
+    vertical-align: top;
+    border-bottom: 1px solid #f8f8f8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .task-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .task-table .col-num {
+    width: 28px;
+    color: #ccc;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .task-table .col-task {
+    width: 40%;
+    padding-right: 12px;
+    font-weight: 500;
+  }
+
+  .task-table .col-detail {
+    color: #888;
+    font-weight: 400;
+    word-break: keep-all;
+  }
+
+  .task-table .col-priority {
+    width: 50px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .priority-critical { color: #dc2626; font-weight: 600; font-size: 12px; }
+  .priority-high { color: #ea580c; font-weight: 600; font-size: 12px; }
+  .priority-medium { color: #ca8a04; font-weight: 500; font-size: 12px; }
+  .priority-normal { color: #16a34a; font-weight: 500; font-size: 12px; }
+
+  .ai-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: #f3f4f6;
+    color: #888;
+    border: 1px solid #e0e0e0;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+  }
+
+  /* Divider between sections */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 40px;
+  }
+
+  .section-divider .line {
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+  }
+
+  .section-divider .label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .compare-table th {
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    background: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .compare-table td {
+    padding: 12px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: top;
+  }
+
+  .compare-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Timeline */
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .timeline-period {
+    padding: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .timeline-tasks {
+    padding: 20px;
+    font-size: 13px;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.8;
+  }
+
+  .timeline-tasks .task-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .timeline-tasks .owner-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .tag-ian { background: #1a1a1a; color: #fff; }
+  .tag-dong { background: #2563eb; color: #fff; }
+  .tag-sam { background: #7c3aed; color: #fff; }
+  .tag-min { background: #059669; color: #fff; }
+  .tag-soo { background: #d97706; color: #fff; }
+  .tag-claude { background: #e5e7eb; color: #666; }
+
+  /* Bottleneck */
+  .bottleneck-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #dc2626;
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .bottleneck-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .bottleneck-card p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .note-box {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 24px;
+    font-size: 13px;
+    color: #666;
+  }
+
+  .note-box strong {
+    color: #1a1a1a;
+  }
+
+  @media print {
+    body { padding: 20px; }
+    .person-block, .structure-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Product Solution 팀 R&R</h1>
+  <div class="subtitle">GLPH · ODD · 마트약국 — 역할 및 책임 정의</div>
+  <div class="date">2026. 05. 26 작성 · v1.0</div>
+</div>
+
+<!-- 1. TEAM STRUCTURE -->
+<div class="section">
+  <div class="section-title">1. 팀 구조</div>
+  <div class="section-subtitle">브랜드 3개, 팀원 5명</div>
+
+  <div class="structure-box">
+    <div class="structure-grid">
+      <div class="structure-row">
+        <div class="structure-level">총괄</div>
+        <div class="structure-content">
+          <span class="member-chip chip-ian">IAN <span class="role">비즈니스 리더</span></span>
+        </div>
+      </div>
+      <div class="structure-row">
+        <div class="structure-level">마케팅</div>
+        <div class="structure-content">
+          <span class="member-chip chip-dong">DONG <span class="role">마케팅 총괄</span></span>
+          <span class="member-chip chip-sam">SAM <span class="role">CRM · 채널 · AI 파이프라인</span></span>
+        </div>
+      </div>
+      <div class="structure-row">
+        <div class="structure-level">디자인</div>
+        <div class="structure-content">
+          <span class="member-chip chip-min">MIN <span class="role">GLPH 디자인</span></span>
+          <span class="member-chip chip-soo">SOO <span class="role">오프라인 디자인</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">Individual R&R</div>
+  <div class="line"></div>
+</div>
+
+<!-- 2. IAN -->
+<div class="section">
+  <div class="person-block">
+    <div class="person-header">
+      <span class="member-chip chip-ian" style="font-size:15px; padding:10px 20px;">IAN</span>
+      <div>
+        <div class="person-name">비즈니스 리더</div>
+        <div class="person-title">브랜드 총괄 · 마케팅 총괄 · 크리에이티브 디렉터 — ODD, GLPH</div>
+      </div>
+    </div>
+    <div class="person-principle">방향 설정, 의사결정, 크리에이티브 디렉팅, 이해관계자 관리. 실행은 팀에 위임.</div>
+
+    <div class="task-group">
+      <div class="task-group-title">GLPH 한국</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">1</td>
+          <td class="col-task">브랜드 스토리 확정</td>
+          <td class="col-detail">컨셉, 내러티브, 제목 최종 확정</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">2</td>
+          <td class="col-task">캠페인 메시지 · 퍼스널리티 정의</td>
+          <td class="col-detail">브랜드 톤, 핵심 메시지, 퍼스널리티 프레임</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">3</td>
+          <td class="col-task">패키지 디자인 디렉팅</td>
+          <td class="col-detail">SKU 1·2·3 직접 진행</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">4</td>
+          <td class="col-task">SKU 배합비 · 견적 · 샘플링 · 제조사 관리</td>
+          <td class="col-detail">제조사 커뮤니케이션, 포뮬러 의사결정</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">5</td>
+          <td class="col-task">런칭 프로세스 총괄 + 콘텐츠 최종 검수</td>
+          <td class="col-detail">예산 · 타임라인 · 전략 최종본. 블로그 · 시딩 · SNS 브랜드 톤 가드</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">6</td>
+          <td class="col-task">오프라인 전략 (의원 · 약국 · 자문위원)</td>
+          <td class="col-detail">입점 협상, 수수료 구조, 파트너 관계 관리</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">7</td>
+          <td class="col-task">리플렛 · 제품카드 내용 기획</td>
+          <td class="col-detail">내용 확정 → MIN 디자인 핸드오프</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">8</td>
+          <td class="col-task">VMD 콘셉트 디렉팅</td>
+          <td class="col-detail">의원 · 약국 VMD 방향 → MIN 디자인</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">9</td>
+          <td class="col-task">SNS 톤앤매너 · 브랜드 페이지 콘텐츠 방향</td>
+          <td class="col-detail">인스타 · 브랜드 페이지 크리에이티브 디렉션</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">GLPH 글로벌</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">10</td>
+          <td class="col-task">글로벌 마케팅 전략 수립</td>
+          <td class="col-detail">시장 · 채널 · 타이밍 방향 설정</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">ODD 글로벌</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">11</td>
+          <td class="col-task">SNS 콘텐츠 기획 · 제작 · 배포</td>
+          <td class="col-detail">글로벌 채널 크리에이티브 디렉션 + 실행</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">12</td>
+          <td class="col-task">재생산 패키지 디자인 디렉팅</td>
+          <td class="col-detail">기존 버전 업그레이드</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">ODD 한국</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">13</td>
+          <td class="col-task">국내 마케팅 전략 방향</td>
+          <td class="col-detail">쿠팡 · 네이버 전략 방향 설정. SAM 실행</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">HANAH1 GROUP</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">14</td>
+          <td class="col-task">HANAH1 GROUP 페이지 개발</td>
+          <td class="col-detail">직접 진행</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 3. DONG -->
+<div class="section">
+  <div class="person-block">
+    <div class="person-header">
+      <span class="member-chip chip-dong" style="font-size:15px; padding:10px 20px;">DONG</span>
+      <div>
+        <div class="person-name">마케팅 총괄</div>
+        <div class="person-title">블로그 · 시딩 · PR — 콘텐츠로 "글리프" 검색량을 만든다</div>
+      </div>
+    </div>
+    <div class="person-principle">마케팅 리소스의 70~80%가 투입되는 블로그 퀄리티와 시딩 전략의 오너. 검색 첫 페이지 장악이 핵심 미션.</div>
+
+    <div class="task-group">
+      <div class="task-group-title">블로그 · 바이럴 — 최우선</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">1</td>
+          <td class="col-task">바이럴 대행사 선정 · 관리</td>
+          <td class="col-detail">상위 랭킹 보장을 조건부로 계약. 대행사 성과 모니터링</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">2</td>
+          <td class="col-task">블로그 원고 가이드 작성</td>
+          <td class="col-detail">카피 가능/금지 매트릭스, 의학자문 검수 가이드라인</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">3</td>
+          <td class="col-task">고퀄 자체 원고 기획 · 감수</td>
+          <td class="col-detail">학술 · 논문 수준 GLP-1 전문 콘텐츠. "마운자로 부작용 총정리" 급</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">4</td>
+          <td class="col-task">GLP-1 전문 블로그 운영</td>
+          <td class="col-detail">브랜드 페이지 내. GLP-1 부작용이 궁금하면 무조건 여기로 오게 만든다</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">5</td>
+          <td class="col-task">약사 블로그 운영 관리</td>
+          <td class="col-detail">네이버 별도 운영. 박종필 약사 명의 콘텐츠</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">6</td>
+          <td class="col-task">키워드별 랭킹 모니터링</td>
+          <td class="col-detail">타겟 키워드 TOP 10 검색 순위 추적, 대행사 성과 관리</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">시딩</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">7</td>
+          <td class="col-task">시딩 전략 수립 · 대상 선정</td>
+          <td class="col-detail">유튜브 · 인스타 — 어떤 채널에, 어떤 스토리로, 타겟 규모 산출</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">8</td>
+          <td class="col-task">시딩 콘텐츠 가이드 작성</td>
+          <td class="col-detail">카피 가능/금지, 스토리 방향, 식약처 리스크 회피</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">9</td>
+          <td class="col-task">주사제 사용자 다이렉트 컨택</td>
+          <td class="col-detail">샘플 제공을 통한 관계 구축. 자연스러운 후기 유도</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">10</td>
+          <td class="col-task">페이드 시딩 대상 확보</td>
+          <td class="col-detail">다이어트 · 미용 특화 약사 · 의사 인플루언서 중심</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">PR</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">11</td>
+          <td class="col-task">PR 기사 기획 · 매체 관리</td>
+          <td class="col-detail">의학매체 (메디게이트, 청년의사 등) + 잡지사 (여성 타겟)</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">12</td>
+          <td class="col-task">PR 지속 발행 관리</td>
+          <td class="col-detail">1주일 단위 꾸준한 발행. 리뷰형 · 부작용 기사형 · 이미지 선정</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 4. SAM -->
+<div class="section">
+  <div class="person-block">
+    <div class="person-header">
+      <span class="member-chip chip-sam" style="font-size:15px; padding:10px 20px;">SAM</span>
+      <div>
+        <div class="person-name">CRM · 채널 · AI 파이프라인</div>
+        <div class="person-title">CRM · 전환 · 데이터 · 채널 운영 · AI 파이프라인 구축</div>
+      </div>
+    </div>
+    <div class="person-principle">DONG이 만든 트래픽을 매출과 재구매로 전환하는 시스템을 구축 · 운영. AI 활용 워크플로 설계 · 구축 전담. ODD 국내 채널 병행.</div>
+
+    <div class="task-group">
+      <div class="task-group-title">GLPH — 전환 · CRM · 데이터</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">1</td>
+          <td class="col-task">재구매 루프 설계 · 실행</td>
+          <td class="col-detail">14일분 제품 재구매 주기, 구독 전환, 크로스셀 시나리오</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">2</td>
+          <td class="col-task">CRM 시스템 구축</td>
+          <td class="col-detail">카카오 채널 + 채널톡 + 자사몰 백엔드 연동. 자동화 캠페인 5종 세팅</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">3</td>
+          <td class="col-task">"글리프" 검색량 트래킹 대시보드</td>
+          <td class="col-detail">네이버 · 구글 검색량, 키워드 랭킹, 시딩 효과 상관관계 분석</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">4</td>
+          <td class="col-task">자사몰 결제 시스템 연동 · 전환율 최적화</td>
+          <td class="col-detail">결제 퍼널 분석, A/B 테스트. (외형은 구축 완료, 결제만 연결)</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">5</td>
+          <td class="col-task">시딩 자동화 파이프라인</td>
+          <td class="col-detail">DONG이 전략 · 대상 선정 → SAM이 컨택 · 발송 · 트래킹 · 게시 확인 자동화</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">6</td>
+          <td class="col-task">사용 후기 자연 유도 시스템</td>
+          <td class="col-detail">구매자 → 후기 작성 인센티브 설계 · 자동화</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">GLPH — AI 활용 워크플로 구축</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">7</td>
+          <td class="col-task">SNS 카드뉴스 기획 자동화</td>
+          <td class="col-detail">AI 활용 기획 파이프라인 구축 (주제 · 카피 · 구조) → MIN에게 디자인 핸드오프</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">8</td>
+          <td class="col-task">블로그 · 콘텐츠 AI 워크플로 구축</td>
+          <td class="col-detail">초안 생성 프로세스 설계. DONG이 프롬프트 · 가이드 제공 → AI 초안 → DONG 감수</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">GLPH — 채널 운영</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">9</td>
+          <td class="col-task">네이버 스마트스토어 운영</td>
+          <td class="col-detail">개설, 리뷰 확보, 운영 관리</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">10</td>
+          <td class="col-task">쿠팡 일반배송 입점 · 관리</td>
+          <td class="col-detail">브랜드 플래그. 검색 시 존재 확인용</td>
+          <td class="col-priority"><span class="priority-normal">P3</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">ODD</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">11</td>
+          <td class="col-task">국내 재고 소진 전략 · 실행</td>
+          <td class="col-detail">스타터킷 7,000개 (유통기한 11월). 쿠팡 프로모션 · CPC 집중</td>
+          <td class="col-priority"><span class="priority-critical">🔴 긴급</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">12</td>
+          <td class="col-task">ODD 국내 채널 관리</td>
+          <td class="col-detail">쿠팡 · 네이버 스스. 프로모션 참여 + CPC 광고 관리</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">13</td>
+          <td class="col-task">ODD 틱톡 시딩 자동화</td>
+          <td class="col-detail">틱톡샵 컨디션 관리. 미국 재고 600개 (유통기한 11월)</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">14</td>
+          <td class="col-task">ODD D2C · Amazon 채널 관리</td>
+          <td class="col-detail">영어 커뮤니케이션</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">15</td>
+          <td class="col-task">ODD SNS 콘텐츠 업로드 · 관리</td>
+          <td class="col-detail">콘텐츠 발행 및 채널 운영</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 5. MIN -->
+<div class="section">
+  <div class="person-block">
+    <div class="person-header">
+      <span class="member-chip chip-min" style="font-size:15px; padding:10px 20px;">MIN</span>
+      <div>
+        <div class="person-name">GLPH 디자인</div>
+        <div class="person-title">브랜드 페이지 · SNS · 오프라인 제작물 — GLPH 비주얼 전체</div>
+      </div>
+    </div>
+    <div class="person-principle">GLPH의 눈에 보이는 모든 것. 런칭 전 오프라인 제작물 우선, 런칭 후 디지털 콘텐츠 지속.</div>
+
+    <div class="task-group">
+      <div class="task-group-title">런칭 전 — 우선 제작</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">1</td>
+          <td class="col-task">리플렛 디자인</td>
+          <td class="col-detail">GLP-1 정보 가이드. 비광고 형태</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">2</td>
+          <td class="col-task">제품카드 디자인</td>
+          <td class="col-detail">제품 소개 + 자사몰 QR. 리플렛에 끼워 배부</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">3</td>
+          <td class="col-task">VMD 디자인</td>
+          <td class="col-detail">카운터 POP, 진료실 피규어, 벽면 포스터. 의원 6 + 약국 3 = 초도 11세트</td>
+          <td class="col-priority"><span class="priority-critical">P0</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">4</td>
+          <td class="col-task">인증라벨 디자인</td>
+          <td class="col-detail">의원 입구 권위 표시용</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">런칭 후 — 지속 운영</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">5</td>
+          <td class="col-task">GLPH 브랜드 페이지 디자인</td>
+          <td class="col-detail">GLP-1 전문 블로그 섹션 포함</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">6</td>
+          <td class="col-task">SNS 카드뉴스 콘텐츠 제작</td>
+          <td class="col-detail">SAM이 기획 자동화 → MIN 디자인 실행</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">7</td>
+          <td class="col-task">인스타 브랜드 채널 피드 · 릴스</td>
+          <td class="col-detail">주 5회 발행 (릴스 3 + 피드 2)</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">8</td>
+          <td class="col-task">세트 묶음 패키징 디자인</td>
+          <td class="col-detail">하드웨어 장치 확정 시 착수</td>
+          <td class="col-priority"><span class="priority-normal">대기</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 6. SOO -->
+<div class="section">
+  <div class="person-block">
+    <div class="person-header">
+      <span class="member-chip chip-soo" style="font-size:15px; padding:10px 20px;">SOO</span>
+      <div>
+        <div class="person-name">오프라인 디자인</div>
+        <div class="person-title">마트약국 30% + GLPH 70% (6월 중순 전환)</div>
+      </div>
+    </div>
+    <div class="person-principle">6월 중순까지 마트약국 집중. 이후 GLPH 인쇄물 · 제작물 중심으로 전환. MIN과 분업: MIN = 디지털 + 브랜드 아이덴티티 / SOO = 인쇄 · 오프라인 제작 관리.</div>
+
+    <div class="task-group">
+      <div class="task-group-title">마트약국 (30%)</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">1</td>
+          <td class="col-task">1~2호점 인쇄물 지속 관리</td>
+          <td class="col-detail">상시 운영</td>
+          <td class="col-priority"><span class="priority-high">상시</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">2</td>
+          <td class="col-task">3호점 디자인 개발</td>
+          <td class="col-detail">2~3개월 뒤 착수 예정</td>
+          <td class="col-priority"><span class="priority-normal">8~9월</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">GLPH (70% — 6월 중순~)</div>
+      <table class="task-table">
+        <tr>
+          <td class="col-num">3</td>
+          <td class="col-task">VMD 제작 관리</td>
+          <td class="col-detail">MIN 디자인 → SOO 인쇄 · 납품 · 설치 관리. 의원/약국 확장분 포함</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">4</td>
+          <td class="col-task">오프라인 인쇄물 제작 관리</td>
+          <td class="col-detail">리플렛 · 제품카드 인쇄 발주, 의원별 코드 스티커 등</td>
+          <td class="col-priority"><span class="priority-high">P1</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">5</td>
+          <td class="col-task">ODD 재생산 패키지 디자인</td>
+          <td class="col-detail">IAN 디렉팅 하에 실행</td>
+          <td class="col-priority"><span class="priority-medium">P2</span></td>
+        </tr>
+        <tr>
+          <td class="col-num">6</td>
+          <td class="col-task">HANAH1 GROUP 명함 디자인</td>
+          <td class="col-detail">IAN 미진행 시 담당</td>
+          <td class="col-priority"><span class="priority-normal">P3</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">DONG vs SAM</div>
+  <div class="line"></div>
+</div>
+
+<!-- 8. DONG vs SAM COMPARISON -->
+<div class="section">
+  <div class="section-title">2. 마케팅 분업 구조</div>
+  <div class="section-subtitle">DONG = 퍼널 상단 (인지 · 검색) / SAM = 퍼널 하단 (전환 · 재구매)</div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th style="width:20%;"></th>
+        <th style="width:40%;">DONG — 마케팅 총괄</th>
+        <th style="width:40%;">SAM — CRM · 채널 · AI 파이프라인</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:600; color:#888;">한 줄 정의</td>
+        <td>콘텐츠로 검색량을 만든다</td>
+        <td>시스템으로 검색량을 매출로 바꾼다</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600; color:#888;">핵심 KPI</td>
+        <td>블로그 첫 페이지 장악률, 시딩 게시 수, "글리프" 연관 콘텐츠 볼륨</td>
+        <td>재구매율, 전환율, 검색량 추이, 후기 수</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600; color:#888;">핵심 역량</td>
+        <td>크리에이티브 + 대행사 관리 + 매체 관계</td>
+        <td>데이터 분석 + 시스템 구축 + AI 워크플로</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600; color:#888;">시딩 분업</td>
+        <td>전략 · 대상 선정 · 콘텐츠 가이드</td>
+        <td>자동화 파이프라인 구축 · 운영</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600; color:#888;">ODD</td>
+        <td>—</td>
+        <td>국내 채널 전체 + 재고 소진 + 틱톡</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">Timeline</div>
+  <div class="line"></div>
+</div>
+
+<!-- 9. TIMELINE -->
+<div class="section">
+  <div class="section-title">3. 6월~9월 타임라인</div>
+  <div class="section-subtitle">런칭 준비 → 런칭 → 물량 폭격 → 시장 안착</div>
+
+  <div class="timeline-grid">
+    <div class="timeline-period">6월 1~2주<br><span style="font-size:11px; color:#888;">SAM 조인</span></div>
+    <div class="timeline-tasks">
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> ODD 국내 재고 소진 전략 수립 + 쿠팡 프로모션 세팅</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> GLPH 자사몰 결제 시스템 연동</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 바이럴 대행사 선정 · 계약 (상위 랭킹 보장 조건)</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 블로그 원고 가이드 v1 완성</div>
+      <div class="task-item"><span class="owner-tag tag-min">MIN</span> 리플렛 · 제품카드 디자인 착수</div>
+      <div class="task-item"><span class="owner-tag tag-ian">IAN</span> 리플렛 · 제품카드 내용 확정 → 공유</div>
+    </div>
+
+    <div class="timeline-period">6월 3~4주<br><span style="font-size:11px; color:#888;">SOO 전환</span></div>
+    <div class="timeline-tasks">
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> CRM 구축 (카카오 채널 + 채널톡)</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 재구매 루프 v1 설계</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> "글리프" 검색량 대시보드 세팅</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> AI 파이프라인 구축 (블로그 초안 · 카드뉴스 기획 · 시딩 자동화)</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 고퀄 블로그 콘텐츠 사전 제작 (런칭 전 발행분)</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 시딩 대상 리스트 확정 + 사전 컨택</div>
+      <div class="task-item"><span class="owner-tag tag-min">MIN</span> VMD 디자인 완료 → 제작 발주</div>
+      <div class="task-item"><span class="owner-tag tag-min">MIN</span> 리플렛 · 제품카드 디자인 완료 → 인쇄</div>
+      <div class="task-item"><span class="owner-tag tag-soo">SOO</span> GLPH 70% 전환. 인쇄물 제작 관리 합류</div>
+      <div class="task-item"><span class="owner-tag tag-ian">IAN</span> 브랜드 에셋 사진촬영</div>
+      <div class="task-item"><span class="owner-tag tag-ian">IAN</span> 의원 · 약국 입점 최종 협의</div>
+    </div>
+
+    <div class="timeline-period">7월 1~2주<br><span style="font-size:11px; color:#888;">런칭 준비 마무리</span></div>
+    <div class="timeline-tasks">
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> GLP-1 전문 블로그 오픈 + 사전 콘텐츠 발행</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 시딩 사전 컨택 완료 · 제품 발송 준비</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> PR 1차 발행 (의학매체)</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> CRM 자동화 캠페인 최종 테스트</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 시딩 자동화 파이프라인 최종 세팅</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 네이버 스마트스토어 개설</div>
+      <div class="task-item"><span class="owner-tag tag-min">MIN</span> 인스타 브랜드 채널 런칭 (주 5회 발행 시작)</div>
+      <div class="task-item"><span class="owner-tag tag-soo">SOO</span> VMD 의원 · 약국 설치 완료</div>
+      <div class="task-item"><span class="owner-tag tag-soo">SOO</span> 리플렛 · 제품카드 배부</div>
+    </div>
+
+    <div class="timeline-period" style="background:#fff5f5;">7월 3~4주<br><span style="font-size:11px; color:#dc2626; font-weight:600;">SKU 1·2·3 런칭</span></div>
+    <div class="timeline-tasks" style="background:#fff5f5;">
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 바이럴 콘텐츠 대량 발행 개시</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 유튜브 · 인스타 시딩 본격 가동</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> CRM 자동화 캠페인 온보딩</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 시딩 자동화 파이프라인 가동</div>
+      <div class="task-item"><span class="owner-tag tag-min">MIN</span> SNS 카드뉴스 제작 본격화</div>
+      <div class="task-item"><span class="owner-tag tag-ian">IAN</span> 오프라인 의원 · 약국 제품 배치</div>
+    </div>
+
+    <div class="timeline-period" style="background:#fef3c7;">8월<br><span style="font-size:11px; color:#d97706; font-weight:600;">물량 폭격 + 퍼널 최적화</span></div>
+    <div class="timeline-tasks" style="background:#fef3c7;">
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 바이럴 · 시딩 최대 볼륨 유지 — 기시감 · 대세감 조성</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 키워드 랭킹 실시간 모니터링 + 콘텐츠 보강</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> PR 지속 발행 (주 1회 페이스)</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 고객 퍼널 가설 수립 → 검증 → 재설정 사이클</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 전환율 데이터 수집 → 최적화</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 후기 유도 시스템 가동</div>
+      <div class="task-item"><span class="owner-tag tag-min">MIN</span> SNS 카드뉴스 지속 제작</div>
+      <div class="task-item">전원 — 주간 KPI 리뷰 ("글리프" 검색량 + 퍼널 전환율)</div>
+    </div>
+
+    <div class="timeline-period" style="background:#ecfdf5;">9월~<br><span style="font-size:11px; color:#059669; font-weight:600;">시장 안착</span></div>
+    <div class="timeline-tasks" style="background:#ecfdf5;">
+      <div class="task-item" style="font-weight:600;">"마운자로 부작용" 검색 → 글리프 즉시 노출 → 구매 전환</div>
+      <div class="task-item"><span class="owner-tag tag-dong">DONG</span> 바이럴 · 시딩 유지 운영 (볼륨 조절)</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> CRM 재구매 루프 본격 가동 · 구독 전환 추진</div>
+      <div class="task-item"><span class="owner-tag tag-sam">SAM</span> 퍼널 최적화 결과 기반 채널별 예산 재배분</div>
+      <div class="task-item">전원 — 월간 KPI 리뷰 (검색량 · 전환율 · 재구매율)</div>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">Risk</div>
+  <div class="line"></div>
+</div>
+
+<!-- 10. BOTTLENECK -->
+<div class="section">
+  <div class="section-title">4. 병목 포인트</div>
+
+  <div class="bottleneck-card">
+    <h4>① SAM 조인 시기</h4>
+    <p>6월 초 조인 가정으로 타임라인 설계됨. 조인 지연 시 자사몰 결제 연동, CRM 구축, ODD 재고 소진 모두 밀림. 미조인 시 인턴 2명 채용 필요하나, 인턴 전력화에 1~2개월 소요되어 7월 런칭에 CRM · 채널 운영 공백 발생.</p>
+  </div>
+
+  <div class="bottleneck-card">
+    <h4>② ODD 국내 재고 7,000개 (유통기한 11월)</h4>
+    <p>6월~10월 = 5개월. 월 1,400개 소진 필요. 쿠팡 프로모션 · CPC만으로는 부족할 수 있음. 번들 할인, 체험단 전환, 크로스 프로모션 등 복합 전략 필요. SAM 조인 즉시 최우선 착수.</p>
+  </div>
+
+  <div class="bottleneck-card">
+    <h4>③ MIN 업무 집중도</h4>
+    <p>런칭 전: 리플렛 + 제품카드 + VMD + 인증라벨이 동시 진행. 런칭 후: SNS 주 5회 + 카드뉴스가 추가. 6월 중순 SOO 합류 전까지 MIN 단독 부담. 런칭 전 오프라인 제작물 우선 완료 → 런칭 후 디지털 전환 순서 엄수.</p>
+  </div>
+
+  <div class="note-box">
+    <strong>SAM 미조인 시 대안:</strong> ODD 국내 채널(쿠팡·네이버 스스)과 GLPH 채널 운영을 인턴에게 배분. CRM 구축 · AI 워크플로는 IAN이 1차 세팅 후 인턴이 운영. CRM · 재구매 루프는 DONG이 일부 흡수하되, 블로그 퀄리티에 투입할 시간이 줄어드는 트레이드오프 발생.</div>
+</div>
+
+</body>
+</html>
